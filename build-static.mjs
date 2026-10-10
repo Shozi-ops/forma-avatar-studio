@@ -1,0 +1,17 @@
+import {cp,mkdir,writeFile} from 'node:fs/promises';
+await mkdir('dist',{recursive:true});
+await cp('public','dist',{recursive:true});
+await mkdir('dist/vendor/build',{recursive:true});
+await mkdir('dist/vendor/examples/jsm/controls',{recursive:true});
+await mkdir('dist/vendor/examples/jsm/exporters',{recursive:true});
+for(const file of ['three.module.js','three.core.js'])await cp('node_modules/three/build/'+file,'dist/vendor/build/'+file);
+await cp('node_modules/three/examples/jsm/controls/OrbitControls.js','dist/vendor/examples/jsm/controls/OrbitControls.js');
+await cp('node_modules/three/examples/jsm/exporters/GLTFExporter.js','dist/vendor/examples/jsm/exporters/GLTFExporter.js');
+await mkdir('dist/vision',{recursive:true});
+await cp('node_modules/@mediapipe/tasks-vision/vision_bundle.mjs','dist/vision/vision_bundle.mjs');
+await cp('node_modules/@mediapipe/tasks-vision/wasm','dist/vision/wasm',{recursive:true});
+await cp('THIRD_PARTY_NOTICES.md','dist/THIRD_PARTY_NOTICES.md');
+await cp('node_modules/three/LICENSE','dist/vendor/LICENSE');
+await mkdir('dist/api',{recursive:true});
+await writeFile('dist/api/health',JSON.stringify({engine:'mediapipe-local-face-mesh',inferenceLocation:'browser',generationAvailable:true,fullAvatarReconstruction:false}));
+console.log('Static app prepared in dist. All inference assets are local.');

@@ -1,0 +1,10 @@
+import {test,after,before} from 'node:test';
+import assert from 'node:assert/strict';
+import {server} from './server.mjs';
+let base;
+before(async()=>{await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));base=`http://127.0.0.1:${server.address().port}`;});
+after(()=>new Promise(resolve=>server.close(resolve)));
+test('server does not accept or store photo uploads',async()=>{const response=await fetch(base+'/api/avatars',{method:'POST'});assert.equal(response.status,409);assert.equal((await response.json()).error,'LOCAL_INFERENCE');});
+test('health identifies local inference without claiming full-body reconstruction',async()=>{const result=await (await fetch(base+'/api/health')).json();assert.equal(result.generationAvailable,true);assert.equal(result.inferenceLocation,'browser');assert.equal(result.fullAvatarReconstruction,false);});
+test('serves app and refuses unrelated filesystem paths',async()=>{assert.equal((await fetch(base+'/')).status,200);assert.equal((await fetch(base+'/server.mjs')).status,404);});
+test('serves local model and WASM with required types',async()=>{const model=await fetch(base+'/models/face_landmarker.task');assert.equal(model.status,200);assert.ok((await model.arrayBuffer()).byteLength>3000000);const wasm=await fetch(base+'/vision/wasm/vision_wasm_internal.wasm');assert.equal(wasm.headers.get('content-type'),'application/wasm');await wasm.arrayBuffer();});
