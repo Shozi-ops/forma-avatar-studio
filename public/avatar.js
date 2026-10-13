@@ -1,51 +1,11 @@
 import * as THREE from 'three';
 
 export const CATALOG={
- tops:[
-  {id:'tee',name:'Everyday tee',color:'#d9d4c8',kind:'tee'},
-  {id:'tank',name:'Summer tank',color:'#f4f1ea',kind:'tee'},
-  {id:'hoodie',name:'Studio hoodie',color:'#61736c',kind:'hoodie'},
-  {id:'sweater',name:'Knit sweater',color:'#8b3a3a',kind:'hoodie'},
-  {id:'shirt',name:'Oxford shirt',color:'#b6c7d4',kind:'shirt'},
-  {id:'polo',name:'Weekend polo',color:'#2c4a6e',kind:'shirt'},
-  {id:'jacket',name:'City jacket',color:'#343b48',kind:'jacket'},
-  {id:'denim',name:'Denim jacket',color:'#3d5a80',kind:'jacket'}
- ],
- bottoms:[
-  {id:'jeans',name:'Straight jeans',color:'#354d68',kind:'pants'},
-  {id:'chinos',name:'Khaki chinos',color:'#c4a574',kind:'pants'},
-  {id:'joggers',name:'Soft joggers',color:'#3a3d42',kind:'pants'},
-  {id:'cargo',name:'Cargo trousers',color:'#78785e',kind:'cargo'},
-  {id:'shorts',name:'Weekend shorts',color:'#b5a18b',kind:'shorts'},
-  {id:'bermuda',name:'Bermuda shorts',color:'#5c6b4a',kind:'shorts'},
-  {id:'skirt',name:'A-line skirt',color:'#554d64',kind:'skirt'},
-  {id:'midi',name:'Midi skirt',color:'#6b4c5a',kind:'skirt'}
- ],
- shoes:[
-  {id:'sneakers',name:'Court sneakers',color:'#ece8dd',kind:'sneakers'},
-  {id:'runners',name:'Trail runners',color:'#e8e4d9',kind:'sneakers'},
-  {id:'boots',name:'Chelsea boots',color:'#493b31',kind:'boots'},
-  {id:'hikers',name:'Hiker boots',color:'#5a4a32',kind:'boots'},
-  {id:'loafers',name:'Classic loafers',color:'#292a2b',kind:'loafers'},
-  {id:'derby',name:'Derby shoes',color:'#6b4423',kind:'loafers'}
- ],
- hair:[
-  {id:'crop',name:'Textured crop',color:'#30251f',kind:'crop'},
-  {id:'buzz',name:'Buzz cut',color:'#1a1614',kind:'crop'},
-  {id:'bob',name:'Soft bob',color:'#503b2c',kind:'bob'},
-  {id:'fringe',name:'Fringe bob',color:'#7a3e2e',kind:'bob'},
-  {id:'long',name:'Long layers',color:'#2f2925',kind:'long'},
-  {id:'ponytail',name:'Low ponytail',color:'#3d2b1f',kind:'long'},
-  {id:'curls',name:'Natural curls',color:'#211d1a',kind:'curls'},
-  {id:'none',name:'No hair',color:'#d1b294',kind:'none'}
- ],
- accessories:[
-  {id:'none',name:'No eyewear',color:'#222',kind:'none'},
-  {id:'round',name:'Round frames',color:'#847258',kind:'round'},
-  {id:'cateye',name:'Cat-eye frames',color:'#8b6914',kind:'round'},
-  {id:'square',name:'Square frames',color:'#262a2b',kind:'square'},
-  {id:'aviators',name:'Aviators',color:'#c9a227',kind:'square'}
- ]
+ tops:[{id:'tee',name:'Everyday tee',color:'#d9d4c8',kind:'tee'},{id:'tank',name:'Summer tank',color:'#f4f1ea',kind:'tee'},{id:'hoodie',name:'Studio hoodie',color:'#61736c',kind:'hoodie'},{id:'sweater',name:'Knit sweater',color:'#8b3a3a',kind:'hoodie'},{id:'shirt',name:'Oxford shirt',color:'#b6c7d4',kind:'shirt'},{id:'polo',name:'Weekend polo',color:'#2c4a6e',kind:'shirt'},{id:'jacket',name:'City jacket',color:'#343b48',kind:'jacket'},{id:'denim',name:'Denim jacket',color:'#3d5a80',kind:'jacket'}],
+ bottoms:[{id:'jeans',name:'Straight jeans',color:'#354d68',kind:'pants'},{id:'chinos',name:'Khaki chinos',color:'#c4a574',kind:'pants'},{id:'joggers',name:'Soft joggers',color:'#3a3d42',kind:'pants'},{id:'cargo',name:'Cargo trousers',color:'#78785e',kind:'cargo'},{id:'shorts',name:'Weekend shorts',color:'#b5a18b',kind:'shorts'},{id:'bermuda',name:'Bermuda shorts',color:'#5c6b4a',kind:'shorts'},{id:'skirt',name:'A-line skirt',color:'#554d64',kind:'skirt'},{id:'midi',name:'Midi skirt',color:'#6b4c5a',kind:'skirt'}],
+ shoes:[{id:'sneakers',name:'Court sneakers',color:'#ece8dd',kind:'sneakers'},{id:'runners',name:'Trail runners',color:'#e8e4d9',kind:'sneakers'},{id:'boots',name:'Chelsea boots',color:'#493b31',kind:'boots'},{id:'hikers',name:'Hiker boots',color:'#5a4a32',kind:'boots'},{id:'loafers',name:'Classic loafers',color:'#292a2b',kind:'loafers'},{id:'derby',name:'Derby shoes',color:'#6b4423',kind:'loafers'}],
+ hair:[{id:'crop',name:'Textured crop',color:'#30251f',kind:'crop'},{id:'buzz',name:'Buzz cut',color:'#1a1614',kind:'crop'},{id:'bob',name:'Soft bob',color:'#503b2c',kind:'bob'},{id:'fringe',name:'Fringe bob',color:'#7a3e2e',kind:'bob'},{id:'long',name:'Long layers',color:'#2f2925',kind:'long'},{id:'ponytail',name:'Low ponytail',color:'#3d2b1f',kind:'long'},{id:'curls',name:'Natural curls',color:'#211d1a',kind:'curls'},{id:'none',name:'No hair',color:'#d1b294',kind:'none'}],
+ accessories:[{id:'none',name:'No eyewear',color:'#222',kind:'none'},{id:'round',name:'Round frames',color:'#847258',kind:'round'},{id:'cateye',name:'Cat-eye frames',color:'#8b6914',kind:'round'},{id:'square',name:'Square frames',color:'#262a2b',kind:'square'},{id:'aviators',name:'Aviators',color:'#c9a227',kind:'square'}]
 };
 export const DEFAULT_LOOK={tops:'tee',bottoms:'jeans',shoes:'sneakers',hair:'crop',accessories:'none',skin:'#b98c70',width:1,height:1};
 export function item(category,id){return CATALOG[category].find(x=>x.id===id)||CATALOG[category][0];}
@@ -54,6 +14,9 @@ export function wardrobeIcon(category,id){const product=item(category,id),c=prod
  else if(category==='bottoms')drawing=product.kind==='skirt'?`<path d="M31 13H69L85 84H15Z" fill="${c}"/><path d="M29 22H71M38 27 30 79M62 27 70 79" stroke="#aaa" fill="none"/>`:`<path d="M22 12H78L83 ${product.kind==='shorts'?58:87}H55L50 37 45 ${product.kind==='shorts'?58:87}H17Z" fill="${c}"/><path d="M22 20H78M50 20V37" stroke="#a1adba" fill="none"/>${product.kind==='cargo'?'<path d="M21 43H39V59H21ZM61 43H79V59H61Z" fill="none" stroke="#c3bea6"/>':''}`;
  else if(category==='shoes')drawing=`<path d="M15 ${product.kind==='boots'?30:44}H48L54 62 83 68Q94 72 90 82H12Q6 64 15 ${product.kind==='boots'?30:44}Z" fill="${c}"/><path d="M11 80H90V87H11Z" fill="#a6a7a2"/><path d="M44 57 58 63M47 62 64 68" stroke="#969b97" stroke-width="3"/>`;
  else if(category==='hair')drawing=`<ellipse cx="50" cy="55" rx="26" ry="34" fill="#c49b80"/>${id==='none'?'':`<path d="M20 53Q8 5 48 10Q87 4 82 53L72 35Q56 41 31 29Z${product.kind==='long'?'M21 40 13 90H32V44M79 40 87 90H68V44':product.kind==='bob'?'M20 40 17 73H31V40M80 40 83 73H69V40':''}" fill="${c}"/>`}${product.kind==='curls'?'<g fill="#211d1a"><circle cx="25" cy="27" r="13"/><circle cx="44" cy="19" r="14"/><circle cx="64" cy="20" r="14"/><circle cx="79" cy="33" r="12"/></g>':''}`;
- else drawing=id==='none'?'<circle cx="50" cy="48" r="28" fill="none" stroke="#c2c6c1" stroke-width="2"/><path d="m29 69 42-42" stroke="#c2c6c1" stroke-width="2"/>':`<${product.kind==='round'?'ellipse cx="28" cy="49" rx="18" ry="18"':'rect x="10" y="32" width="36" height="30" rx="5"'} fill="none" stroke="${c}" stroke-width="5"/><${product.kind==='round'?'ellipse cx="72" cy="49" rx="18" ry="18"':'rect x="54" y="32" width="36" height="30" rx="5"'} fill="none" stroke="${c}" stroke-width="5"/><path d="M46 45H54M10 40 3 35M90 40 97 35" stroke="${c}" stroke-width="4"/>`;
+ else drawing=id==='none'?'<circle cx="50" cy="48" r="28" fill="none" stroke="#c2c6c1" stroke-width="2"/><path d="m29 69 42-42" stroke="#c2c6c1" stroke-width="2"/>':`<${product.kind==='round'?'ellipse cx="28" cy="49" rx="18" ry="18"':'rect x="10" y="32" width="36" height="30" rx="5"'} fill="none" stroke="${c}" stroke-width="5"/><${product.kind==='round'?'ellipse cx="72" cy="49" rx="18" ry="18"':'rect x="54" y="32" width="36" height="30" rx="5"'} fill="none" stroke="${c}" stroke-width="5"/><path d="M46 45H54M10 40 3 35M90 40 97 35" stroke="#c}" stroke-width="4"/>`;
  return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">${drawing}</svg>`);
 }
+
+function material(color,fabric=false){const m=new THREE.MeshStandardMaterial({color,roughness:fabric?.95:.72});if(fabric){const canvas=document.createElement('canvas');canvas.width=canvas.height=64;const ctx=canvas.getContext('2d');ctx.fillStyle='#deded8';ctx.fillRect(0,0,64,64);for(let i=0;i<64;i+=2){ctx.fillStyle=i%4?'#ddddda':'#eeeeea';ctx.fillRect(i,0,1,64);ctx.fillRect(0,i,64,1);}const map=new THREE.CanvasTexture(canvas);map.wrapS=map.wrapT=THREE.RepeatWrapping;map.repeat.set(12,12);m.map=map;}return m;}
+function pointSegmentDistance(p,a,b){const delta=b.clone().sub(a),t=THREE.MathUtils.clamp(p.clone().sub(a).dot(delta)/delta.lengthSq(),0,1);return p.distanceTo(a.clone().addScaledVector(delta,t));}
