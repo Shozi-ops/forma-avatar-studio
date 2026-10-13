@@ -1,19 +1,32 @@
 # Forma Avatar Studio
 
-Run `npm ci` and `npm start`, then open http://localhost:3000. Node 20+.
+Private, on-device 3D avatars from a single selfie. No account. No photo upload. Export GLB.
 
-Upload a front-facing portrait, enable local processing, and select Create my avatar. Select garments from Tops, Bottoms, Shoes, Hair and Eyewear. Preview idle/walk motion, adjust body proportions, and export GLB or PNG. Save named avatars to the device library and reopen them after refreshing.
+```bash
+npm ci && npm start
+```
 
-## Implemented
+Open http://localhost:3000 (Node 20+).
 
-Local MediaPipe inference produces a 468-vertex photo-textured face with estimated depth and a generic rear cranium. A CC0 MakeHuman body provides a 22-bone skeleton. Continuous fitted garment meshes, scalp-fitted hair and eyewear are selectable. Garments follow the anatomical base with shared smooth normals and clean clipped hems. GLB embeds textures, skeleton and optional Idle/Walk clips. IndexedDB stores named avatars, cropped face textures and portable GLBs locally. Removal supports undo. Photos never leave the browser; the server refuses photo uploads.
+## What Forma is
 
-## Current limitations
+Forma is an independent avatar studio. A front-facing portrait is reconstructed locally with MediaPipe landmarks into a photo-textured face, fitted to a humanoid body with selectable wardrobe, motion preview, and GLB/PNG export. Avatars can be saved in the browser library.
 
-This is a functional independent prototype, not production Avaturn parity. Face depth and unseen head surfaces are approximate. Body shape is generic rather than reconstructed. Garments and hair are procedural starter assets with visible fit/seam limitations. Bone weights are approximate. There are no facial morph targets, ARKit blendshapes, automatic Mixamo retargeting, accounts, cloud sync or production head fitting. Camera requires browser permission. Local library data depends on browser storage and should be backed up via GLB export.
+**Different by design**
+
+- **On-device only** — photos never leave the browser; the server refuses photo uploads
+- **One selfie** — no multi-angle scan or account required
+- **Instant wardrobe** — tops, bottoms, shoes, hair, eyewear; shuffle or pick
+- **Portable GLB** — skeleton, materials, optional idle/walk clips
+
+## Wardrobe
+
+Tops, bottoms, shoes, hair, and eyewear with multiple styles (tees, hoodies, polos, denim, chinos, skirts, boots, runners, curls, aviators, and more). Garments are continuous meshes fitted to the anatomical base.
+
+## Limits (honest)
+
+Single-photo depth is approximate; the rear head is inferred. Body shape is generic, not reconstructed from the selfie. Bone weights are approximate. There are no facial morph targets or automatic Mixamo retargeting in this build. Camera needs browser permission. Local library data should be backed up via GLB export.
 
 ## Verification
 
-`npm test` checks server/model serving and upload rejection. `node verify-glb.mjs /path/to/portrait-avatar.glb` checks face depth, embedded PNG textures, 22 joints and Idle/Walk animations. The public MediaPipe sample portrait was used for browser verification; no user selfie was used.
-
-See VERIFICATION.md and THIRD_PARTY_NOTICES.md for evidence and provenance.
+`npm test` checks serving and upload rejection. `node verify-glb.mjs path/to/avatar.glb` checks structure. See VERIFICATION.md and THIRD_PARTY_NOTICES.md.
