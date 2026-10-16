@@ -6,7 +6,7 @@
   <meta name="description" content="Forma — private, on-device 3D avatars from a single selfie. Customize wardrobe, preview motion, export GLB. Your photo never leaves the browser.">
   <meta name="theme-color" content="#365341">
   <meta property="og:title" content="Forma — Avatar Studio">
-  <meta property="og:description" content="Create a photoreal face and rigged avatar on your device. No account. No upload. Export ready for games, apps, and the web.">
+  <meta property="og:description" content="Create a photo-textured face on a customizable rigged body. Process locally, save on this device, and export GLB.">
   <title>Forma — Avatar Studio</title>
   <link rel="stylesheet" href="/studio.css">
   <script type="importmap">{"imports":{"three":"/vendor/build/three.module.js","three/addons/":"/vendor/examples/jsm/"}}</script>
@@ -30,8 +30,8 @@
   <main class="app">
     <aside class="identity" aria-label="Create your avatar">
       <div class="eyebrow">FORMA · YOUR FACE, YOUR WORLD</div>
-      <h1>One selfie.<br>A full avatar.</h1>
-      <p class="lead">Front-facing photo in. Phototextured face, fitted wardrobe, and a rigged body out — processed only on this device.</p>
+      <h1>Your face.<br> Your own style.</h1>
+      <p class="lead">Create a photo-textured face on a customizable 3D body. Choose your wardrobe, preview movement, then save or export — all on this device.</p>
 
       <div class="capture-tips" aria-label="Photo tips">
         <span>Well lit</span><span>Face the camera</span><span>No heavy filters</span>
@@ -76,7 +76,7 @@
       </section>
 
       <div class="model-info" id="model-info">
-        Forma runs face reconstruction locally. Save keeps your avatar and face texture in this browser. Export GLB for any engine.
+        Facial depth is estimated from your photo. The body is generic; sliders change its appearance, not your measurements. Save keeps your avatar in this browser.
       </div>
     </aside>
 
@@ -154,7 +154,7 @@
       <h2>Take Forma with you</h2>
       <button data-close="export-dialog" aria-label="Close export dialog" type="button">✕</button>
     </div>
-    <p>Full avatar with garments, skeleton, and embedded face texture — ready for engines and the web.</p>
+    <p>Export the current avatar, garments and skeleton. Your face texture is included when you have created a photo avatar.</p>
     <div class="export-grid">
       <button id="export-glb" type="button">
         <b>Download avatar · GLB</b>
@@ -173,6 +173,7 @@
   </dialog>
 
   <div id="toast" role="status" hidden></div>
-  <script type="module" src="/app.js"></script>
+  <script type="module" src="/app.js"></script><noscript><p>This studio needs JavaScript to show 3D avatars. Please enable JavaScript in your browser.</p></noscript>
 </body>
 </html>
+

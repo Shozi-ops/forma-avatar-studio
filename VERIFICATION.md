@@ -1,9 +1,21 @@
-# Verification — 2026-10-10
+# Verification â€” 2026-10-17
 
-Browser tested locally using the public Google MediaPipe sample portrait. Reconstruction completed in 5.1 seconds on this device. Selected a hoodie, saved a named avatar, reloaded the page, and reopened the avatar with its face and selected wardrobe intact. Walk preview and export dialog worked. Actual downloaded GLB passed structural validation: 1,376,524 bytes, 468 face vertices, 898 face triangles, nonzero depth, five embedded PNG textures, 22-joint skin, Idle and Walk clips. Four server tests passed.
+## Release changes
+- Restored the missing exported Avatar class from the complete repository source; the previous main branch could not start app.js.
+- Retained supported wardrobe styles, used garment kinds consistently, and removed unsupported shape labels.
+- Kept the body continuous under clothes, preserved skin weights from the original anatomical surface, offset fabric normally at shoulders, and retained straight hem bounds.
+- Removed the duplicate rear-head overlay when a photo face is attached.
+- Added cancellable camera ownership, stale request guards, stream release on background/page exit, explicit playback errors, and busy-state guards during generation/export.
+- Fixed narrow-screen controls being covered by the header, added dialog scrolling, reduced render/shadow workload, and clarified single-photo and local-storage limits.
+- Builds now run all regression tests before producing static assets.
 
-Garment/hair fit and single-photo head likeness remain prototype quality. No ARKit or Mixamo interoperability claim is made. Mobile layout exists, but camera hardware, mobile inference and external engine retargeting have not been validated. The existing private hosting sign-in previously returned invalid_auth_step; local verification does not establish hosted authentication success.
+## Verified locally
+- Twelve automated tests pass: garment continuity/hem bounds; normalized weights and arm deformation for every top; saved-face retention through wardrobe rebuild; camera cancellation/overlap; face coordinate validation; server boundaries and local WASM/model delivery.
+- Public MediaPipe portrait reconstruction completed in 8.3 seconds; the textured face appeared correctly in the front view.
+- Saved a named public sample avatar, reloaded, reopened it with face intact, changed tee/hoodie, and previewed walking.
+- Downloaded GLB validated: 1,602,700 bytes, 468 face vertices, 898 face triangles, five embedded textures, 22 bones, Idle and Walk clips. PNG download succeeded.
+- Desktop 1280x900 and responsive 390x844 views checked. On the narrow layout, uploaded a blank PNG, confirmed local processing, and received a no-face error; controls recovered and the prior avatar remained intact.
+- No browser console errors in tested flows.
 
-## Avatar fit revision
-
-Rebuilt garments as clipped, indexed surfaces of the anatomical human base; removed disconnected shoulder cylinders and separate trouser tubes. Added shared-vertex normals, horizontal hems and relaxed trouser legs. Fitted the scalp to the head, resized the photo face and replaced the detached cranium with a smooth anatomical rear head shell. Mobile body controls are visible. Six automated tests pass, including garment continuity and hem bounds. Browser checked front, side, tee/hoodie selection and walking preview. Single-image likeness and facial expression remain approximate.
+## Acceptance limits
+Physical iPhone/Android camera and performance tests remain outstanding; responsive desktop emulation does not replace them. Single-photo likeness, depth and garment weights remain approximate. There is no validated body measurement, physical cloth simulation, store catalog, real checkout, login, or cross-device storage. This release is a functional local avatar studio, not a finished store-connected try-on product.

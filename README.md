@@ -1,32 +1,33 @@
 # Forma Avatar Studio
 
-Private, on-device 3D avatars from a single selfie. No account. No photo upload. Export GLB.
+Private, on-device photo-avatar creation and wardrobe preview. No Avaturn subscription, account, or API key is needed.
 
-```bash
-npm ci && npm start
+## Run
+Use Node.js 20 or newer:
+
+```sh
+npm ci
+npm start
 ```
 
-Open http://localhost:3000 (Node 20+).
+Open http://127.0.0.1:3000. Camera access requires localhost or HTTPS. Uploading a portrait works without a webcam.
 
-## What Forma is
+```sh
+npm test
+npm run build
+```
 
-Forma is an independent avatar studio. A front-facing portrait is reconstructed locally with MediaPipe landmarks into a photo-textured face, fitted to a humanoid body with selectable wardrobe, motion preview, and GLB/PNG export. Avatars can be saved in the browser library.
+The build runs the regression tests before preparing the self-contained static site in `dist/`. Netlify publishes `dist/` from `main` using `netlify.toml`.
 
-**Different by design**
+## Customer workflow
+1. Upload one well-lit frontal portrait, or take a photo with the camera.
+2. Confirm processing on this device, then choose Create my avatar.
+3. Select clothes, body appearance, hair and eyewear. Preview idle/walk motion and rotate the view.
+4. Save locally, reopen from My avatars, or download GLB/PNG.
 
-- **On-device only** — photos never leave the browser; the server refuses photo uploads
-- **One selfie** — no multi-angle scan or account required
-- **Instant wardrobe** — tops, bottoms, shoes, hair, eyewear; shuffle or pick
-- **Portable GLB** — skeleton, materials, optional idle/walk clips
+Photos and landmarks are processed in a browser worker. Saved avatars and their face textures stay in IndexedDB on that browser. Clearing browser data removes access to the library; export a GLB for a portable copy. No cloud accounts or cross-device storage are included.
 
-## Wardrobe
+## Accurate product limits
+Facial depth comes from landmarks estimated from one photograph. The unseen head and body are generic. Body sliders change visual proportions, not body measurements. Garments are fitted sample meshes with skeletal deformation; there is no physical cloth simulation or validated size/fit prediction. Store products, checkout and customer accounts are not connected. Do not present this as a measured replica of the customer or a completed store integration.
 
-Tops, bottoms, shoes, hair, and eyewear with multiple styles (tees, hoodies, polos, denim, chinos, skirts, boots, runners, curls, aviators, and more). Garments are continuous meshes fitted to the anatomical base.
-
-## Limits (honest)
-
-Single-photo depth is approximate; the rear head is inferred. Body shape is generic, not reconstructed from the selfie. Bone weights are approximate. There are no facial morph targets or automatic Mixamo retargeting in this build. Camera needs browser permission. Local library data should be backed up via GLB export.
-
-## Verification
-
-`npm test` checks serving and upload rejection. `node verify-glb.mjs path/to/avatar.glb` checks structure. See VERIFICATION.md and THIRD_PARTY_NOTICES.md.
+See VERIFICATION.md for release evidence and outstanding real-device checks, and THIRD_PARTY_NOTICES.md for asset provenance.

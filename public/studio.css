@@ -154,3 +154,5 @@ dialog::backdrop{background:rgba(37,51,44,.35);backdrop-filter:blur(2px)}
   .stage{min-height:60vh}
   .stage-hint{bottom:62px}
 }
+
+button,input,select,.upload{scroll-margin-top:95px}dialog{max-height:88svh;overflow:auto}@media(max-width:800px){header{position:relative}.identity,.wardrobe{overflow:visible}.stage{scroll-margin-top:12px}}
