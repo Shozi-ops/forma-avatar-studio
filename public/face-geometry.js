@@ -9,7 +9,7 @@ export function reconstructGeometry(landmarks,indices,width,height){
  if(minX<.002||maxX>.998||minY<.002||maxY>.998)throw new Error('Keep your entire face inside the photo.');
  const cx=(minX+maxX)/2,cy=(minY+maxY)/2,cz=points[168].z,scale=1/(maxX-minX),aspect=height/width;
  const positions=[],uvs=[];
- points.forEach(p=>{positions.push((p.x-cx)*scale,(cy-p.y)*aspect*scale,(cz-p.z)*scale);uvs.push(p.x,1-p.y);});
+ points.forEach(p=>{positions.push((p.x-cx)*scale,(cy-p.y)*aspect*scale,(cz-p.z)*scale*2.35);uvs.push(p.x,1-p.y);});
  const triangles=Array.from(indices);
  if(triangles.length%3||triangles.some(i=>!Number.isInteger(i)||i<0||i>=468))throw new Error('Invalid face topology.');
  // Close the inner boundary loops (eyes and mouth) with photo-textured fans.
@@ -20,8 +20,8 @@ export function reconstructGeometry(landmarks,indices,width,height){
  for(let i=0;i<triangles.length;i+=3){const a=triangles[i]*3,b=triangles[i+1]*3,c=triangles[i+2]*3;const cross=(positions[b]-positions[a])*(positions[c+1]-positions[a+1])-(positions[b+1]-positions[a+1])*(positions[c]-positions[a]);if(cross<0)[triangles[i+1],triangles[i+2]]=[triangles[i+2],triangles[i+1]];}
  // A separate, deliberately generic cranium shares the detected outer boundary.
  const skullPositions=[],skullIndices=[];const centerZ=OVAL.reduce((s,i)=>s+positions[i*3+2],0)/OVAL.length;
- for(const t of Array.from({length:14},(_,i)=>i/14)){const radius=Math.sqrt(1-t*t);for(const i of OVAL)skullPositions.push(positions[i*3]*radius,positions[i*3+1]*radius,t===0?positions[i*3+2]:centerZ-.75*t);}
- for(let ring=0;ring<13;ring++)for(let j=0;j<OVAL.length;j++){const a=ring*OVAL.length+j,b=ring*OVAL.length+(j+1)%OVAL.length,c=a+OVAL.length,d=b+OVAL.length;skullIndices.push(a,c,b,b,c,d);}
- const pole=skullPositions.length/3;skullPositions.push(0,0,centerZ-.75);for(let j=0;j<OVAL.length;j++)skullIndices.push(13*OVAL.length+j,pole,13*OVAL.length+(j+1)%OVAL.length);
+ for(const t of Array.from({length:16},(_,i)=>i/16)){const radius=Math.sqrt(1-t*t)* (1+t*0.08);for(const i of OVAL)skullPositions.push(positions[i*3]*radius,positions[i*3+1]*radius*(1+t*0.04),t===0?positions[i*3+2]:centerZ-1.05*t);}
+ for(let ring=0;ring<15;ring++)for(let j=0;j<OVAL.length;j++){const a=ring*OVAL.length+j,b=ring*OVAL.length+(j+1)%OVAL.length,c=a+OVAL.length,d=b+OVAL.length;skullIndices.push(a,c,b,b,c,d);}
+ const pole=skullPositions.length/3;skullPositions.push(0,0,centerZ-1.05);for(let j=0;j<OVAL.length;j++)skullIndices.push(15*OVAL.length+j,pole,15*OVAL.length+(j+1)%OVAL.length);
  return {positions:new Float32Array(positions),uvs:new Float32Array(uvs),indices:new Uint16Array(triangles),skullPositions:new Float32Array(skullPositions),skullIndices:new Uint16Array(skullIndices),landmarkCount:468,triangleCount:triangles.length/3};
 }
