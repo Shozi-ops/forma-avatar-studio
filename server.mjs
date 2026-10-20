@@ -17,4 +17,6 @@ export const server=http.createServer(async(req,res)=>{
  if(!target.startsWith(base+path.sep)){res.writeHead(403);return res.end();}
  try{const data=await readFile(target);res.setHeader('Content-Type',types[path.extname(target)]||'application/octet-stream');res.end(data);}catch{res.writeHead(404);res.end('Not found');}
 });
-if(process.argv[1]===fileURLToPath(import.meta.url))server.listen(3000,'127.0.0.1',()=>console.log('Avatar Studio: http://localhost:3000'));
+const PORT=process.env.PORT||3000;
+const HOST='0.0.0.0';
+if(process.argv[1]===fileURLToPath(import.meta.url))server.listen(PORT,HOST,()=>console.log(`Avatar Studio: http://${HOST}:${PORT}`));

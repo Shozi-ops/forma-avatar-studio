@@ -1,0 +1,7 @@
+{
+  "name": "Forma — Avatar Studio",
+  "description": "Forma — private, on-device 3D avatars from a single selfie. Customize wardrobe, preview motion, export GLB. Your photo never leaves the browser.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
